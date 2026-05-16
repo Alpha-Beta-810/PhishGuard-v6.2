@@ -1,8 +1,8 @@
-# PhishGuard v5 — Hybrid Threat Intelligence
+# PhishGuard v6.2 — Hybrid Threat Intelligence
 
-## What's new in v5 (vs v4.3)
+## What's new in v6.2 (vs v4.3)
 
-| Capability | v4.3 | v5 |
+| Capability | v4.3 | v6.2 |
 |---|---|---|
 | URL analysis | ✅ | ✅ |
 | Typosquatting | ✅ | ✅ |

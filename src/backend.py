@@ -1,5 +1,5 @@
 # ================================================================
-# backend.py — PhishGuard v4 Hybrid Backend
+# backend.py — PhishGuard v6.2 Hybrid Backend
 #
 # Architecture:
 #   1. Reputation gate  → instant verdict for known domains
@@ -55,7 +55,7 @@ CORS(app)   # allow frontend on any port to call us
 app.config['JSON_SORT_KEYS'] = False
 
 # ── Load model ─────────────────────────────────────────────────
-print("Loading PhishGuard v5 model...")
+print("Loading PhishGuard v6.2 model...")
 model, feature_cols = joblib.load(MODEL_PATH)
 # The stored model is already a fitted CalibratedClassifierCV — no re-wrapping needed.
 # (Re-wrapping with cv="prefit" without calling .fit() causes NotFittedError on predict_proba)
@@ -1558,23 +1558,6 @@ def run_analysis(url: str, fast: bool = False) -> dict:
 # ROUTES
 # ════════════════════════════════════════════════════════════════
 
-@app.route('/health', methods=['GET'])
-def health():
-    return jsonify({
-        "status": "ok",
-        "version": "5.0",
-        "model_features": len(feature_cols),
-        "reputation_db_size": len(REPUTATION_DB),
-        "ml_age_gate_days": ML_AGE_GATE,
-        "vt_configured": bool(VT_API_KEY),
-        "email_scanner": True,
-        "visual_similarity": True,
-        "ml_calibration": True,
-        "redirect_chain": True,
-        "cache_entries": len(ANALYSIS_CACHE),
-    })
-
-
 @app.route('/analyze', methods=['POST'])
 def analyze():
     """Full hybrid analysis: reputation gate + live WHOIS/SSL/DNS + page scrape + ML + fusion."""
@@ -1650,8 +1633,6 @@ def analyze_batch():
             })
     return jsonify({"results": results, "count": len(results)})
 
-
-
 @app.route('/analyze/email', methods=['POST'])
 def analyze_email():
     """
@@ -1719,10 +1700,25 @@ def analyze_email():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
+    
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({
+        "status": "ok",
+        "version": "6.2",
+        "model_features": len(feature_cols),
+        "reputation_db_size": len(REPUTATION_DB),
+        "ml_age_gate_days": ML_AGE_GATE,
+        "vt_configured": bool(VT_API_KEY),
+        "email_scanner": True,
+        "visual_similarity": True,
+        "ml_calibration": True,
+        "redirect_chain": True,
+        "cache_entries": len(ANALYSIS_CACHE),
+    })    
 
 if __name__ == '__main__':
-    print("\n🛡️  PhishGuard v5 — Hybrid Threat Intelligence")
+    print("\n🛡️  PhishGuard v6.2 — Hybrid Threat Intelligence")
     print("   POST /analyze        → full hybrid analysis (live WHOIS/SSL/DNS/page + ML + fusion)")
     print("   POST /analyze/fast   → URL-only instant (no live fetch)")
     print("   POST /analyze/batch  → batch fast (up to 50 URLs)")
@@ -1731,5 +1727,5 @@ if __name__ == '__main__':
     print(f"   VirusTotal   : {'✅ configured' if VT_API_KEY else '⚠️  not set (export VIRUSTOTAL_API_KEY=xxx)'}")
     print(f"   ML age gate  : domains <{ML_AGE_GATE}d get full ML analysis")
     print(f"   Reputation DB: {len(REPUTATION_DB)} entries (instant verdict)")
-    print(f"   New in v5    : email scanner · visual similarity · ML calibration · full redirect chain\n")
+    print(f"   New in v6.2    : email scanner · visual similarity · ML calibration · full redirect chain\n")
     app.run(host='0.0.0.0', port=5000, debug=False, threaded=True)

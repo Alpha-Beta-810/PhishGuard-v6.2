@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PhishGuard v5</title>
+<title>PhishGuard v6.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -770,7 +770,7 @@ body::after {
     <div class="brand">
       <div class="brand-shield">🛡️</div>
       <span class="brand-name">Phish<span>Guard</span></span>
-      <span class="brand-ver">v5</span>
+      <span class="brand-ver">v6.2</span>
     </div>
     <div class="status-pill">
       <div class="status-dot" id="statusDot"></div>
@@ -1343,7 +1343,7 @@ function renderError(msg) {
     <div style="font-family:var(--mono);font-size:.75rem;color:var(--red2);margin-bottom:8px">⚠️ Analysis Failed</div>
     <div style="font-family:var(--mono);font-size:.68rem;color:var(--dim2);line-height:1.7">${msg}</div>
     <div class="info-bar" style="margin-top:12px;margin-bottom:0">Make sure the backend is running:<br>
-    <code style="color:var(--glow)">cd PhishGuard_v5 &amp;&amp; python src/backend.py</code></div>
+    <code style="color:var(--glow)">cd phishguard_v6.2 &amp;&amp; python src/backend.py</code></div>
   </div>`;
 }
 
@@ -1899,7 +1899,7 @@ async function runHealth() {
         <div style="font-family:var(--mono);font-size:.75rem;color:var(--red2);margin-bottom:8px">⚠️ Backend unreachable</div>
         <div style="font-family:var(--mono);font-size:.68rem;color:var(--dim2)">${e.message}</div>
         <div class="info-bar" style="margin-top:12px;margin-bottom:0">Start the backend:<br>
-        <code style="color:var(--glow)">cd PhishGuard_v5 &amp;&amp; python src/backend.py</code></div>
+        <code style="color:var(--glow)">cd phishguard_v6.2 &amp;&amp; python src/backend.py</code></div>
       </div>`;
   }
   clearBusy('healthBtn', 'healthSpinner', 'healthBtnText', '⚙️ Refresh');
@@ -1925,5 +1925,23 @@ window.addEventListener('load', () => {
   setInterval(checkBackend, 30000);
 });
 </script>
+<div style="position: fixed; bottom: 25px; right: 25px; z-index: 9999; text-align: right; opacity: 1.0; transition: opacity 0.4s ease; cursor: default; user-select: none;" 
+     onmouseover="this.style.opacity='0.15'" 
+     onmouseout="this.style.opacity='1.0'">
+  
+  <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: #888888; letter-spacing: 1px; line-height: 1.1;">
+    A THREAT<br>INTELLIGENCE<br>PROTOTYPE
+  </div>
+  <div style="font-family: 'Courier New', monospace; font-size: 0.5rem; color: #aaaaaa; margin-top: 4px;">
+    created by
+  </div>
+  <!--<div style="font-family: 'Brush Script MT', 'Lucida Handwriting', cursive; font-size: 1.1rem; color: #777777; margin-top: 0px;">
+    Sarat
+  </div>-->
+  <div style="font-family: 'Courier New', monospace; font-size: 1.2rem; color: #888888; letter-spacing: 1px; line-height: 1.1;">
+    SARAT
+  </div> 
+  
+</div>
 </body>
 </html>
