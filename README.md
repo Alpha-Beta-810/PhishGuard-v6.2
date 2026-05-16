@@ -4,8 +4,8 @@
 
 | Capability | v4.3 | v6.2 |
 |---|---|---|
-| URL analysis | ✅ | ✅ |
-| Typosquatting | ✅ | ✅ |
+| URL analysis | ⚠️ Limited | ✅ Improved |
+| Typosquatting | ✅ Good | ✅ Near-perfect |
 | Redirect chain | ✅ full chain | ✅ + cross-domain penalty |
 | Trusted-parent gate | ✅ | ✅ expanded (102 entries) |
 | Shortener handling | ✅ resolve+score | ✅ + path-slug hint + structural dest scoring |
